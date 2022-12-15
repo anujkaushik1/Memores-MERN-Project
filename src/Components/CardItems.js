@@ -10,6 +10,7 @@ import { Grid, Paper } from '@mui/material';
 import Box from '@mui/material/Box';
 import testingimage from '../static/testingflask.jpg';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function CardItems() {
   return (
@@ -47,10 +48,12 @@ function CardItems() {
                     species, ranging across all continents except Antarctica
                   </Typography>
                 </CardContent>
-                <CardActions>
-                  
-                  <Button size="small">Share</Button>
-                  <Button size="small">Learn More</Button>
+                <CardActions >
+                  <Button size="small" sx = {{fontWeight : 'bold'}}><ThumbUpIcon fontSize='small' sx={{paddingRight : 0.5}}/>Like</Button>
+                  <Typography variant="body2" color = '#1976d2' sx={{paddingTop : 0.22, fontWeight : 'bold'}}>
+                    0
+                  </Typography>
+                  <Button size="small" sx = {{fontWeight : 'bold', paddingLeft : 11}}><DeleteIcon fontSize='small'/>Delete</Button>
                 </CardActions>
               </Card>
             </Box>
