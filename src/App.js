@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import CardItems from './Components/CardItems';
+import CreateMemory from './Components/CreateMemory';
 
 function MemoriesNavbar() {
   return (
@@ -15,13 +16,16 @@ function App() {
   return (
     <>
       <div className='navbar'>
-        <MemoriesNavbar/>
+        <MemoriesNavbar />
       </div>
 
-      <CardItems/>
+      <div style={{display : 'flex'}}>
+        <CardItems />
+        <CreateMemory />
+      </div>
     </>
-      
-      
+
+
   );
 }
 
