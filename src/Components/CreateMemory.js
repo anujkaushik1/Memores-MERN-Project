@@ -46,12 +46,8 @@ function CreateMemory() {
 
       <input style={{ marginTop: '1rem' }} type="file" id="myfile" />
 
-      <Button sx={{ width: '90%', backgroundColor: '	#0047AB', marginTop: 1.2 }} size='medium' variant="contained">Submit</Button>
-      <Button sx={{
-        width: '90%', backgroundColor: 'red', marginTop: 1.2, '&:focus': {
-          background : 'red'
-        }
-      }} size='small' variant="contained">Clear</Button>
+      <Button sx={{width : '90%', backgroundColor : '	#0047AB', marginTop : 1.2}}  size = 'medium' variant="contained">Submit</Button>
+      <Button disableFocusRipple style={{width : '90%', backgroundColor : 'red', position : 'relative', top : '0.5rem'}}  size = 'small' variant="contained">Clear</Button>
 
     </div>
   )
