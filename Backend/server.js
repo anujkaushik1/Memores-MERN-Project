@@ -1,6 +1,9 @@
+const dotenv = require('dotenv');
 const express = require('express');
 const app = express();
 const connectDB = require('./db/connect');
+
+dotenv.config({ path: "./config.env" });
 
 const PORT = process.env.PORT || 5000;
 
@@ -11,7 +14,7 @@ app.use('/api', memory_routes);
 
 const serverStart = async () => {
     try {
-        await connectDB();
+        await connectDB(process.env.MONGODB_URL);
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
         })
