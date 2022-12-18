@@ -5,7 +5,7 @@ const {getAllMemories, createMemory} = require('../controllers/memoryItems');
 
 router.route('/')
     .get(getAllMemories)
-    .post(createMemory);
+    .post(upload.single('file'), createMemory);
 
 
 module.exports = router;

@@ -15,7 +15,6 @@ const registerUser = async(req, res) => {
 
 const loginUser = async(req, res) => {
     try {
-        
         const {email, password} = req.body;
 
         const user = await Auth.findOne({email : email});

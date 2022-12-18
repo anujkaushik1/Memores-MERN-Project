@@ -6,6 +6,7 @@ const getAllMemories = async(req, res) => {
 
 const createMemory = async(req, res) => {
     try {
+        req.body.file = req.file.filename   // putting filename in req body to save the filename in db
         const memory = await Memory.create(req.body);
         res.status(200).json({
             success : true,

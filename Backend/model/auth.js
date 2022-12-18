@@ -29,6 +29,7 @@ authSchema.methods.matchPassword = async function(enterPass){
     return await bcrypt.compare(enterPass, this.password);
 }
 
+
 authSchema.pre('save', async function(next) {
     try {
 

@@ -5,6 +5,7 @@ const connectDB = require('./db/connect');
 const app = express();
 
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 
 dotenv.config({ path: ".env" });
 
