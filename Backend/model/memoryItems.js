@@ -23,8 +23,15 @@ const memorySchema = new mongoose.Schema({
         maxlength : [50, 'Tags cannot be more than 50 char']
     },
 
+    createdAt : {
+        type : Date,
+        default : Date.now()
+    },
+
     file : {
         type : String,
-        
+        requried : [true, 'Please add file'],
     }
 })
+
+module.exports = mongoose.model('Memory', memorySchema);
