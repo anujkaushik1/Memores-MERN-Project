@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 const express = require('express');
 const connectDB = require('./db/connect');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -9,6 +10,7 @@ dotenv.config({ path: ".env" });
 
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(cors({
     origin: [process.env.REACT_APP_URL],
