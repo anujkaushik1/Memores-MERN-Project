@@ -11,7 +11,8 @@ dotenv.config({ path: ".env" });
 app.use(express.json());
 
 app.use(cors({
-    origin: [process.env.REACT_APP_URL]
+    origin: [process.env.REACT_APP_URL],
+    credentials : true
 }));
 
 app.use('/uploads', express.static('uploads'));
