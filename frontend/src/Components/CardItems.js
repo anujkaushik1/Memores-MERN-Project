@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './CardItems.css'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,8 +11,22 @@ import Box from '@mui/material/Box';
 import testingimage from '../static/testingflask.jpg';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+
 
 function CardItems() {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    
+    if(!Cookies.get('token')){
+      navigate('/login');
+    }
+
+  }, [])
+
   return (
     <div className='carditems-main'>
 

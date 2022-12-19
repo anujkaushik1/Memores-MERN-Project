@@ -16,27 +16,36 @@ function MemoriesNavbar() {
   )
 }
 
+function Memory() {
+  return (
+    <>
+      <div className='navbar'>
+        <MemoriesNavbar />
+      </div>
+
+      <div style={{ display: 'flex' }}>
+        <CardItems />
+        <CreateMemory />
+      </div>
+    </>
+  );
+}
+
 function App() {
   return (
     <>
 
       <BrowserRouter>
         <Routes>
-          
-          <Route path='/signup' element={<Signup/>}></Route>
-          <Route path='/login' element={<Login/>}></Route>
+
+          <Route path='/signup' element={<Signup />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/memory' element={<Memory/>}></Route>
+
         </Routes>
       </BrowserRouter>
 
 
-      {/* <div className='navbar'>
-        <MemoriesNavbar />
-      </div>
-
-      <div style={{display : 'flex'}}>
-        <CardItems />
-        <CreateMemory />
-      </div> */}
     </>
 
 

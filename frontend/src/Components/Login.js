@@ -41,7 +41,7 @@ function Login() {
         try {
             const data =  await axiosClient.post('/login', JSON.stringify({ email, password }));
             console.log(data.data);
-            navigate('/');
+            navigate('/memory');
 
         } catch (error) {
             alert(error.response.data.msg);
