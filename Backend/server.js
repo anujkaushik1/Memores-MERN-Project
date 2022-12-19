@@ -1,13 +1,20 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const connectDB = require('./db/connect');
+const cors = require('cors');
 
 const app = express();
 
-app.use(express.json());
-app.use('/uploads', express.static('uploads'));
-
 dotenv.config({ path: ".env" });
+
+
+app.use(express.json());
+
+app.use(cors({
+    origin: [process.env.REACT_APP_URL]
+}));
+
+app.use('/uploads', express.static('uploads'));
 
 const PORT = process.env.PORT || 5000;
 

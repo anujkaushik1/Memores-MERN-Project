@@ -3,6 +3,16 @@ const bcrypt = require('bcrypt');
 const JWT = require('jsonwebtoken');
 
 const authSchema = new mongoose.Schema({
+    first_name : {
+        type : String,
+        required : [true, 'Please enter name']
+    },
+
+    last_name : {
+        type : String,
+        required : [true, 'Please enter last name']
+    },
+
     email : {
         type : String,
         required : [true, 'Please enter email']
