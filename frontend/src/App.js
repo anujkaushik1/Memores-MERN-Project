@@ -3,8 +3,10 @@ import './App.css';
 import CardItems from './Components/CardItems';
 import CreateMemory from './Components/CreateMemory';
 import Signup from './Components/Signup';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import Login from './Components/Login';
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
 
 
 function MemoriesNavbar() {
@@ -17,6 +19,17 @@ function MemoriesNavbar() {
 }
 
 function Memory() {
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+
+    if(!Cookies.get('token')){
+      navigate('/');
+    }
+
+  }, []);
+
   return (
     <>
       <div className='navbar'>
@@ -39,7 +52,7 @@ function App() {
         <Routes>
 
           <Route path='/signup' element={<Signup />}></Route>
-          <Route path='/login' element={<Login />}></Route>
+          <Route path='/' element={<Login />}></Route>
           <Route path='/memory' element={<Memory/>}></Route>
 
         </Routes>

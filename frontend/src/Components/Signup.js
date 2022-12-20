@@ -46,7 +46,7 @@ function Signup() {
             const data =  await axiosClient.post('/register', JSON.stringify({ first_name, last_name, email, password }));
             console.log(data.data);
             alert('Data successfully submitted');
-            navigate('/login');
+            navigate('/');
 
         } catch (error) {
             console.log(error);
@@ -114,6 +114,7 @@ function Signup() {
                             value={userData.email}
                             disabled = {loading}
                             name="email"
+                            type='email'
                             onChange={(e) => handleInputs(e)}
                             label="Email address"
                             error={error.email}
@@ -123,6 +124,7 @@ function Signup() {
                             id="outlined-basic"
                             sx={{ width: '90%', marginTop: 3 }}
                             label="Password"
+                            type='password'
                             disabled = {loading}
                             onChange={(e) => handleInputs(e)}
                             value={userData.password}
@@ -144,7 +146,7 @@ function Signup() {
                             variant='body2'
                             sx={{ color: 'gray', marginTop: 1, marginLeft: 23 }}>
                             Already registered&nbsp;
-                            <Link to='/login'
+                            <Link to='/'
                                 style={{ textDecoration: 'none', color: '#0096FF' }}>
                                 sign in?
                             </Link>

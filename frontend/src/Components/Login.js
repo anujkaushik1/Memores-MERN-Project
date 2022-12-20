@@ -86,6 +86,7 @@ function Login() {
                             value={userData.email}
                             disabled = {loading}
                             name="email"
+                            type='email'
                             onChange={(e) => handleInputs(e)}
                             label="Email address"
                             error={error.email}
@@ -95,6 +96,7 @@ function Login() {
                             id="outlined-basic"
                             sx={{ width: '90%', marginTop: 3 }}
                             label="Password"
+                            type='password'
                             disabled = {loading}
                             onChange={(e) => handleInputs(e)}
                             value={userData.password}

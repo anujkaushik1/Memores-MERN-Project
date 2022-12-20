@@ -12,20 +12,9 @@ import testingimage from '../static/testingflask.jpg';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
 
 
 function CardItems() {
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    
-    if(!Cookies.get('token')){
-      navigate('/login');
-    }
-
-  }, [])
 
   return (
     <div className='carditems-main'>
