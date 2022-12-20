@@ -57,13 +57,12 @@ function CardItems() {
                   <Typography variant="body2" color = '#1976d2' sx={{paddingTop : 0.22, fontWeight : 'bold'}}>
                     0
                   </Typography>
-                  <Button size="small" sx = {{fontWeight : 'bold', paddingLeft : 11}}><DeleteIcon fontSize='small'/>Delete</Button>
+                  <Button size="small" sx = {{fontWeight : 'bold', position : 'absolute', right : '2rem'}}><DeleteIcon fontSize='small'/>Delete</Button>
                 </CardActions>
               </Card>
             </Box>
           </Grid>
 
-        
           
         </Grid>
 
