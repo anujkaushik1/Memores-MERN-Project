@@ -43,7 +43,7 @@ function Signup() {
             return;
         }
         try {
-            const data =  await axiosClient.post('/register', JSON.stringify({ first_name, last_name, email, password }));
+            const data = await axiosClient.post('/register', JSON.stringify({ first_name, last_name, email, password }));
             console.log(data.data);
             alert('Data successfully submitted');
             navigate('/');
@@ -66,9 +66,9 @@ function Signup() {
         if (!first_name && !last_name && !email && !password) {
             return true;
         }
-        else {
-            return false;
-        }
+
+        return false;
+
     }
 
     return (
@@ -90,7 +90,7 @@ function Signup() {
                             id="outlined-basic"
                             sx={{ width: '90%', marginTop: 3 }}
                             label="First name"
-                            disabled = {loading}
+                            disabled={loading}
                             value={userData.first_name}
                             name="first_name"
                             onChange={(e) => handleInputs(e)}
@@ -101,7 +101,7 @@ function Signup() {
                             id="outlined-basic"
                             sx={{ width: '90%', marginTop: 3 }}
                             value={userData.last_name}
-                            disabled = {loading}
+                            disabled={loading}
                             onChange={(e) => handleInputs(e)}
                             name="last_name"
                             label="Last name"
@@ -112,7 +112,7 @@ function Signup() {
                             id="outlined-basic"
                             sx={{ width: '90%', marginTop: 3 }}
                             value={userData.email}
-                            disabled = {loading}
+                            disabled={loading}
                             name="email"
                             type='email'
                             onChange={(e) => handleInputs(e)}
@@ -125,7 +125,7 @@ function Signup() {
                             sx={{ width: '90%', marginTop: 3 }}
                             label="Password"
                             type='password'
-                            disabled = {loading}
+                            disabled={loading}
                             onChange={(e) => handleInputs(e)}
                             value={userData.password}
                             name="password"
@@ -135,7 +135,7 @@ function Signup() {
                         <Button
                             sx={{ width: '90%', backgroundColor: '#4169E1', marginTop: 3 }}
                             size='medium'
-                            disabled = {loading}
+                            disabled={loading}
                             onClick={createUser}
                             variant="contained">
                             Sign Up
