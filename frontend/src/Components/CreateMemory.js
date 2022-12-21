@@ -4,6 +4,8 @@ import './CreateMemory.css'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+import axiosClient from '../network/client';
 
 function CreateMemory() {
 
@@ -45,7 +47,7 @@ function CreateMemory() {
       return;
     }
 
-    setMemoryObj({ ...memoryObj, file: file })
+    setMemoryObj({ ...memoryObj, file: file });
 
   }
 
@@ -63,7 +65,7 @@ function CreateMemory() {
 
   }
 
-  const createMemory = () => {
+  const createMemory = async() => {
 
     let { creator, title, message, tags, file } = memoryObj;
 
@@ -73,7 +75,25 @@ function CreateMemory() {
       return;
     }
 
-    
+    try {
+      
+      const formData = new FormData();
+      formData.append('creator', creator);
+      formData.append('title', title);
+      formData.append('message', message);
+      formData.append('tags', tags);
+      formData.append('file', file);
+
+      axiosClient.defaults.headers = 'multipart/form-data'; 
+
+      const data = await axiosClient.post('/', formData);
+      alert('Data Submitted Successfully');
+      clearMemoryInputs();
+
+    } catch (error) {
+      console.log(error);
+    }
+
 
   }
 
