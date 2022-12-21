@@ -6,7 +6,7 @@ const { authenticate } = require('../middleware/protect');
 
 router.route('/')
     .get(authenticate, getAllMemories)
-    .post(upload.single('file'), createMemory);
+    .post(authenticate, upload.single('file'), createMemory);
 
 
 module.exports = router;

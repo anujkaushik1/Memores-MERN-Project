@@ -1,7 +1,7 @@
 const Auth = require('../model/auth');
 
 const registerUser = async (req, res) => {
-    try {
+    try {      
         const user = await Auth.create(req.body);
 
         return res.status(200).json({
@@ -12,6 +12,7 @@ const registerUser = async (req, res) => {
     } catch (error) {
         res.status(400).json({
             success: false,
+            msg : error.message
         })
     }
 }
