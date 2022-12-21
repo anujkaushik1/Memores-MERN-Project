@@ -60,7 +60,7 @@ function CreateMemory() {
       tags: '',
       file: ''
     };
-
+    input.current.value = '';
     setMemoryObj({ ...clearObj });
 
   }
@@ -81,6 +81,9 @@ function CreateMemory() {
       formData.append('creator', creator);
       formData.append('title', title);
       formData.append('message', message);
+  
+      tags = "#" + (tags.split(' ').join('_'));
+
       formData.append('tags', tags);
       formData.append('file', file);
 
