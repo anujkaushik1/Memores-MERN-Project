@@ -13,13 +13,14 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axiosClient from '../network/client';
 import moment from 'moment/moment';
+import { FlightTakeoffSharp } from '@mui/icons-material';
 
 
 function CardItems() {
 
   const [memoryItemData, setMemoryItemData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState(null);
   const IMAGE_URL = 'http://localhost:5000/uploads/';
 
   useEffect(() => {
@@ -68,9 +69,10 @@ function CardItems() {
 
   }
 
-  const currentUser = async () => {
+  const currentUser = async() => {
 
     try {
+
       const user = await axiosClient.get('/current');
       return user.data.user._id;
 
@@ -80,6 +82,19 @@ function CardItems() {
 
   }
 
+  const isDeleteDisabled = (item) => {
+
+    if(user === null)
+        return;
+
+    if(item.user === user)
+        return false;
+      
+    return true
+
+  }
+
+  
 
   return (
     <div className='carditems-main'>
@@ -175,6 +190,7 @@ function CardItems() {
                           </Typography>
                           <Button
                             size="small"
+                            disabled = {isDeleteDisabled(item)}
                             sx={{ fontWeight: 'bold', position: 'absolute', right: '2rem' }}>
                             <DeleteIcon
                               fontSize='small' />
