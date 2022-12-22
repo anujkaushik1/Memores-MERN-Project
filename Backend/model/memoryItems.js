@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const memorySchema = new mongoose.Schema({
+    user : {
+        type : String
+    },
     creator : {
         type : String,
         required : [true, 'Please add creator'],
@@ -31,7 +34,9 @@ const memorySchema = new mongoose.Schema({
     file : {
         type : String,
         requried : [true, 'Please add file'],
-    }
+    },
+    
+    likes : [String]
 })
 
 module.exports = mongoose.model('Memory', memorySchema);
