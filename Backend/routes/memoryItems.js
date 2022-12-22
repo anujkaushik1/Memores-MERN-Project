@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const upload = require('../middleware/upload');
-const { getAllMemories, createMemory, likeMemory } = require('../controllers/memoryItems');
+const { getAllMemories, createMemory, likeDislikeMemory, currentUser } = require('../controllers/memoryItems');
 const { authenticate } = require('../middleware/protect');
 
 router.route('/')
@@ -9,7 +9,9 @@ router.route('/')
     .post(authenticate, upload.single('file'), createMemory);
 
 router.route('/like/:id')
-    .post(authenticate, likeMemory);
+    .post(authenticate, likeDislikeMemory);
 
+router.route('/current')
+    .get(authenticate, currentUser);
 
 module.exports = router;

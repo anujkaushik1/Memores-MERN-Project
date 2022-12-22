@@ -37,24 +37,33 @@ const createMemory = async (req, res) => {
 
 }
 
-const likeMemory = async (req, res) => {
+const likeDislikeMemory = async (req, res) => {
 
     try {
 
         const user = req.user;
-        const likedUser = req.params.id;
+        const likedUserId = req.params.id;
 
-        const likedUserData = await Memory.findOneAndUpdate({
-            _id : likedUser
-        }, {
-            $addToSet : {
-                likes : user
-            }
-        });
+        const likedUserData = await Memory.find({_id : likedUserId});
+        
+        const findUser = likedUserData[0].likes.find((ele) => ele === user._id);
 
+        let userData;
+
+        if(findUser){
+            userData = likedUserData[0].likes.filter((ele) => ele !== user._id);
+            likedUserData[0].likes = userData;
+        }   
+        else{
+            likedUserData[0].likes.push(user._id);
+        }
+
+        const updatedLikeData = await Memory.replaceOne({'_id' : likedUserId}, likedUserData[0])
+
+        console.log(updatedLikeData);
         res.status(200).json({
             success : true,
-            data : likedUserData
+            data : updatedLikeData
         })
 
     } catch (error) {
@@ -66,6 +75,22 @@ const likeMemory = async (req, res) => {
 
 }
 
+const currentUser = async(req, res) => {
+
+    try {
+        res.status(200).json({
+            success : true,
+            user : req.user
+        })
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            data: error.message
+        })
+    }
+
+}
 
 
-module.exports = { getAllMemories, createMemory, likeMemory };
+
+module.exports = { getAllMemories, createMemory, likeDislikeMemory, currentUser };

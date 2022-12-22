@@ -1,5 +1,5 @@
-let arr = [1,2,3,4,5];
+let arr = [1,2,3,4,5,4,4,4];
 
-let b = arr.map((i) => i * 2);
+let x = arr.find((v) => v === 18);
 
-console.log(arr);
+console.log(x);

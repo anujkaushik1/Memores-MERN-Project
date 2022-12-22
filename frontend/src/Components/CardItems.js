@@ -11,16 +11,16 @@ import Box from '@mui/material/Box';
 import testingimage from '../static/testingflask.jpg';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Cookies from 'js-cookie';
 import axiosClient from '../network/client';
-
+import moment from 'moment/moment';
 
 
 function CardItems() {
 
   const [memoryItemData, setMemoryItemData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const IMAGE_URL = 'http://localhost:5000/uploads/'
+  const [user, setUser] = useState('');
+  const IMAGE_URL = 'http://localhost:5000/uploads/';
 
   useEffect(() => {
 
@@ -32,22 +32,53 @@ function CardItems() {
 
         const memoryData = data.data.data.map((item) => {
           const image = IMAGE_URL + item.file;
+          const dateTimeAgo = moment(new Date(item.createdAt)).fromNow();
           item.file = image;
+          item.createdAt = dateTimeAgo;
           return item;
-        });  
-        
+        });
 
         setMemoryItemData(memoryData);
         setLoading(false);
+        setUser(await currentUser());
 
       } catch (error) {
-          console.log(error.response);
-          setLoading(true);
+        console.log(error.response);
+        setLoading(true);
       }
 
     })();
 
   }, []);
+
+
+
+  const likeMemory = async (item) => {
+
+    try {
+
+      const memoryId = item._id;
+
+      const likedUserData = await axiosClient.post(`/like/${memoryId}`);
+      console.log(likedUserData.data);
+
+    } catch (error) {
+      console.log(error.response);
+    }
+
+  }
+
+  const currentUser = async () => {
+
+    try {
+      const user = await axiosClient.get('/current');
+      return user.data.user._id;
+
+    } catch (error) {
+        console.log(error.response);
+    }
+
+  }
 
 
   return (
@@ -66,7 +97,6 @@ function CardItems() {
             </div>
             :
             <Grid
-              sm={12} lg={10} xs={12} md={10}
               container
               position={'relative'}
               left={'15.5rem'}
@@ -75,6 +105,7 @@ function CardItems() {
               {
                 memoryItemData.map((item, idx) => (
                   <Grid
+                    key={idx}
                     item
                     bottom={8} marginTop={2} paddingLeft={2} paddingRight={2}
                     position={'relative'}>
@@ -128,6 +159,7 @@ function CardItems() {
                         <CardActions >
                           <Button
                             size="small"
+                            onClick={() => likeMemory(item)}
                             sx={{ fontWeight: 'bold' }}>
                             <ThumbUpIcon
                               fontSize='small'
@@ -139,7 +171,7 @@ function CardItems() {
                             variant="body2"
                             color='#1976d2'
                             sx={{ paddingTop: 0.22, fontWeight: 'bold' }}>
-                            0
+                            {item.likes.length}
                           </Typography>
                           <Button
                             size="small"
