@@ -49,6 +49,8 @@ const likeDislikeMemory = async (req, res) => {
         const findUser = userData[0].likes.find((ele) => ele === user._id);
 
         let likeDataArr;
+        let isLike = userData[0].isLike;
+
 
         if(findUser){
             likeDataArr = userData[0].likes.filter((ele) => ele !== user._id);
@@ -63,7 +65,8 @@ const likeDislikeMemory = async (req, res) => {
             _id : likedUserId
         }, {
             $set : {
-                likes : likeDataArr
+                likes : likeDataArr,
+                isLike : !isLike
             }
         });
 
@@ -97,12 +100,29 @@ const currentUser = async(req, res) => {
 
 }
 
-const deleteMemory = () => {
+const deleteMemory = async(req, res) => {
 
+    try {
 
+        const memoryId = req.params.id;
 
+        await Memory.findByIdAndDelete({_id : memoryId});
+        res.status(200).json({
+            success : true,
+            msg : `Memory with id ${memoryId} has been deleted`
+        })
+
+    } catch (error) {
+        
+        res.status(400).json({
+            success: false,
+            data: error.message
+        })
+    }
+
+    
 }
 
 
 
-module.exports = { getAllMemories, createMemory, likeDislikeMemory, currentUser };
+module.exports = { getAllMemories, createMemory, likeDislikeMemory, currentUser, deleteMemory };

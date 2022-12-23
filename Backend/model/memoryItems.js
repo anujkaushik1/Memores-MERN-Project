@@ -36,7 +36,14 @@ const memorySchema = new mongoose.Schema({
         requried : [true, 'Please add file'],
     },
     
-    likes : [String]
+    likes : [String],
+
+    isLike : {
+        type : Boolean,
+        default : false
+    }
+
 })
+
 
 module.exports = mongoose.model('Memory', memorySchema);
