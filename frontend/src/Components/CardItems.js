@@ -93,6 +93,19 @@ function CardItems() {
     return true
 
   }
+
+  const deleteMemory = async(item) => {
+
+    try {
+      const memoryId = item._id;
+      await axiosClient.delete(`/${memoryId}`);
+      
+    } catch (error) {
+      console.log(error.response); 
+    }
+
+
+  }
  
 
   return (
@@ -190,6 +203,7 @@ function CardItems() {
                           <Button
                             size="small"
                             disabled = {isDeleteDisabled(item)}
+                            onClick = {() => deleteMemory(item)}
                             sx={{ fontWeight: 'bold', position: 'absolute', right: '2rem' }}>
                             <DeleteIcon
                               fontSize='small' />
