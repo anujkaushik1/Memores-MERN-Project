@@ -13,7 +13,6 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axiosClient from '../network/client';
 import moment from 'moment/moment';
-import { FlightTakeoffSharp } from '@mui/icons-material';
 
 
 function CardItems() {
@@ -27,31 +26,37 @@ function CardItems() {
 
     (async () => {
 
-      try {
-
-        const data = await axiosClient.get('/');
-
-        const memoryData = data.data.data.map((item) => {
-          const image = IMAGE_URL + item.file;
-          const dateTimeAgo = moment(new Date(item.createdAt)).fromNow();
-          item.file = image;
-          item.createdAt = dateTimeAgo;
-          return item;
-        });
-
-        setMemoryItemData(memoryData);
-        setLoading(false);
-        setUser(await currentUser());
-
-      } catch (error) {
-        console.log(error.response);
-        setLoading(true);
-      }
+      getAllMemoryItems();
+      setUser(await currentUser());
+      setLoading(false);
 
     })();
 
   }, []);
 
+
+  const getAllMemoryItems = async () => {
+
+    try {
+
+      const data = await axiosClient.get('/');
+
+      const memoryData = data.data.data.map((item) => {
+        const image = IMAGE_URL + item.file;
+        const dateTimeAgo = moment(new Date(item.createdAt)).fromNow();
+        item.file = image;
+        item.createdAt = dateTimeAgo;
+        return item;
+      });
+
+      setMemoryItemData(memoryData);
+
+    } catch (error) {
+      console.log(error.response);
+      setLoading(true);
+    }
+
+  }
 
 
   const likeMemory = async (item) => {
@@ -60,8 +65,9 @@ function CardItems() {
 
       const memoryId = item._id;
 
-      const likedUserData = await axiosClient.post(`/like/${memoryId}`);
-      console.log(likedUserData.data);
+      await axiosClient.post(`/like/${memoryId}`);
+
+      getAllMemoryItems();
 
     } catch (error) {
       console.log(error.response);
@@ -69,7 +75,7 @@ function CardItems() {
 
   }
 
-  const currentUser = async() => {
+  const currentUser = async () => {
 
     try {
 
@@ -77,36 +83,38 @@ function CardItems() {
       return user.data.user._id;
 
     } catch (error) {
-        console.log(error.response);
+      console.log(error.response);
     }
 
   }
 
   const isDeleteDisabled = (item) => {
 
-    if(user === null)
-        return;
+    if (user === null)
+      return;
 
-    if(item.user === user)
-        return false;
-      
+    if (item.user === user)
+      return false;
+
     return true
 
   }
 
-  const deleteMemory = async(item) => {
+  const deleteMemory = async (item) => {
 
     try {
       const memoryId = item._id;
       await axiosClient.delete(`/${memoryId}`);
-      
+      getAllMemoryItems();
+      alert('Memory has been deleted');
+
     } catch (error) {
-      console.log(error.response); 
+      console.log(error.response);
     }
 
 
   }
- 
+
 
   return (
     <div className='carditems-main'>
@@ -191,7 +199,9 @@ function CardItems() {
                             <ThumbUpIcon
                               fontSize='small'
                               sx={{ paddingRight: 0.5 }} />
-                            Like
+                            
+                            {item.isLike ? 'Dislike' : 'Like'}
+
                           </Button>
 
                           <Typography
@@ -202,8 +212,8 @@ function CardItems() {
                           </Typography>
                           <Button
                             size="small"
-                            disabled = {isDeleteDisabled(item)}
-                            onClick = {() => deleteMemory(item)}
+                            disabled={isDeleteDisabled(item)}
+                            onClick={() => deleteMemory(item)}
                             sx={{ fontWeight: 'bold', position: 'absolute', right: '2rem' }}>
                             <DeleteIcon
                               fontSize='small' />

@@ -89,7 +89,7 @@ function CreateMemory() {
 
       axiosClient.defaults.headers = 'multipart/form-data'; 
 
-      const data = await axiosClient.post('/', formData);
+      await axiosClient.post('/', formData);
       alert('Data Submitted Successfully');
       clearMemoryInputs();
 
