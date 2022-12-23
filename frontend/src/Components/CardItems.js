@@ -15,7 +15,7 @@ import axiosClient from '../network/client';
 import moment from 'moment/moment';
 
 
-function CardItems() {
+function CardItems(props) {
 
   const [memoryItemData, setMemoryItemData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,10 +29,11 @@ function CardItems() {
       getAllMemoryItems();
       setUser(await currentUser());
       setLoading(false);
+      
 
     })();
 
-  }, []);
+  }, [props.parentBool]);
 
 
   const getAllMemoryItems = async () => {
@@ -115,7 +116,6 @@ function CardItems() {
 
   }
 
-
   return (
     <div className='carditems-main'>
 
@@ -195,10 +195,10 @@ function CardItems() {
                           <Button
                             size="small"
                             onClick={() => likeMemory(item)}
-                            sx={{ fontWeight: 'bold' }}>
+                            sx={{ fontWeight: 'bold', color : !item.isLike && 'gray' }}>
                             <ThumbUpIcon
                               fontSize='small'
-                              sx={{ paddingRight: 0.5 }} />
+                              sx={{ paddingRight: 0.5,  }} />
                             
                             {item.isLike ? 'Dislike' : 'Like'}
 

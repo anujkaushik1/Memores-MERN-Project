@@ -6,7 +6,7 @@ import Signup from './Components/Signup';
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import Login from './Components/Login';
 import Cookies from 'js-cookie';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function MemoriesNavbar() {
@@ -21,6 +21,11 @@ function MemoriesNavbar() {
 function Memory() {
   
   const navigate = useNavigate();
+  const [parentBool, setParentBool] = useState(false);
+
+  const changeState = (val) => {
+    setParentBool(val);
+  }
 
   useEffect(() => {
 
@@ -37,8 +42,8 @@ function Memory() {
       </div>
 
       <div style={{ display: 'flex' }}>
-        <CardItems />
-        <CreateMemory />
+        <CardItems parentBool = {parentBool} />
+        <CreateMemory parentBool = {parentBool} changeState = {changeState}/>
       </div>
     </>
   );

@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import axiosClient from '../network/client';
 
-function CreateMemory() {
+function CreateMemory(props) {
 
   const [memoryObj, setMemoryObj] = useState({
     creator: '',
@@ -90,6 +90,9 @@ function CreateMemory() {
       axiosClient.defaults.headers = 'multipart/form-data'; 
 
       await axiosClient.post('/', formData);
+
+      props.changeState(!props.parentBool);
+
       alert('Data Submitted Successfully');
       clearMemoryInputs();
 
