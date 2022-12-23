@@ -57,7 +57,8 @@ function App() {
         <Routes>
 
           <Route path='/signup' element={<Signup />}></Route>
-          <Route path='/' element={<Login />}></Route>
+          <Route path='/' element = {<Navigate to = '/login'/>}></Route>
+          <Route path='/login' element={<Login />}></Route>
           <Route path='/memory' element={<Memory/>}></Route>
 
         </Routes>
