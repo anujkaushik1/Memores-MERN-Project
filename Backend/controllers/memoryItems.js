@@ -44,26 +44,32 @@ const likeDislikeMemory = async (req, res) => {
         const user = req.user;
         const likedUserId = req.params.id;
 
-        const likedUserData = await Memory.find({_id : likedUserId});
+        const userData = await Memory.find({_id : likedUserId});
         
-        const findUser = likedUserData[0].likes.find((ele) => ele === user._id);
+        const findUser = userData[0].likes.find((ele) => ele === user._id);
 
-        let userData;
+        let likeDataArr;
 
         if(findUser){
-            userData = likedUserData[0].likes.filter((ele) => ele !== user._id);
-            likedUserData[0].likes = userData;
+            likeDataArr = userData[0].likes.filter((ele) => ele !== user._id);
         }   
         else{
-            likedUserData[0].likes.push(user._id);
+            const likes = userData[0].likes;
+            likes.push(user._id);
+            likeDataArr = [...likes];
         }
 
-        const updatedLikeData = await Memory.replaceOne({'_id' : likedUserId}, likedUserData[0])
+        const updatedUserData = await Memory.updateOne({
+            _id : likedUserId
+        }, {
+            $set : {
+                likes : likeDataArr
+            }
+        });
 
-        console.log(updatedLikeData);
         res.status(200).json({
             success : true,
-            data : updatedLikeData
+            data :updatedUserData
         })
 
     } catch (error) {
@@ -88,6 +94,12 @@ const currentUser = async(req, res) => {
             data: error.message
         })
     }
+
+}
+
+const deleteMemory = () => {
+
+
 
 }
 
