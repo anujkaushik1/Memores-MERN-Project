@@ -71,18 +71,65 @@ function Login() {
                 <Box sx={{ minWidth: 275 }}>
                     <Card variant="outlined"
                         className='login-card'
-                        sx={{ height: 450, width: 400, borderRadius: 10 }}>
+                        sx={{ 
+                            height: {
+                                xs : 350,
+                                sm : 350,
+                                md : 400,
+                                lg : 400,
+                                xl : 400
+                            }, 
+                            width: {
+                                xs : 270,
+                                sm : 350,
+                                md : 400,
+                                lg : 400,
+                                xl : 400
+                            }, 
+                            
+                            borderRadius: {
+                                xs : 4  ,
+                                sm : 4,
+                                md : 10,
+                                lg : 10,
+                                xl : 10
+                            } 
+                            
+                            }}>
                         <Typography
                             component='span'
                             variant='body2'
-                            sx={{color: 'black', fontSize: '25px', fontWeight: '600' }}>
+                            sx={{
+                                color: 'black', 
+                                fontSize: {
+                                    xs : '18px',     
+                                    sm : '20px',
+                                    md : '22px'
+                                },
+                                position : {
+                                    xs : 'relative',
+                                },  
+
+                                bottom : {
+                                    xs : 10,
+                                    md : 12,
+                                    lg : 20,
+                                },
+
+                                fontWeight: '600' 
+
+                                }}>
                             Sign In
                         </Typography>
 
-
+                        {/* width: '90%', 
+                        marginTop: */}
                         <TextField
                             id="outlined-basic"
-                            sx={{ width: '90%', marginTop: 3 }}
+                            sx={{ 
+                                width: '90%',       
+                                marginTop: 3 
+                                }}
                             value={userData.email}
                             disabled = {loading}
                             name="email"
@@ -104,8 +151,16 @@ function Login() {
                             error={error.password}
                             variant="outlined" />
 
+                        {/* sx={{ width: '90%', backgroundColor: '#4169E1', marginTop: 3 }} */}
                         <Button
-                            sx={{ width: '90%', backgroundColor: '#4169E1', marginTop: 3 }}
+                            sx={{ 
+                                width: '90%', 
+                                height : {
+                                    xs : '10%'
+                                },
+                                backgroundColor: '#4169E1', 
+                                marginTop: 3 
+                                }}
                             size='medium'
                             disabled = {loading}
                             onClick={loginUser}
@@ -113,10 +168,23 @@ function Login() {
                             Log in
                         </Button>
 
+                        {/* sx={{ 
+                                color: 'gray', 
+                                marginTop: 1, 
+                                marginLeft: 30 
+                                }}> */}
                         <Typography
                             component='span'
                             variant='body2'
-                            sx={{ color: 'gray', marginTop: 1, marginLeft: 30 }}>
+                            sx={{ 
+                                color: 'gray', 
+                                marginTop: 1, 
+                                marginLeft: {
+                                    md : 30,
+                                    lg : 30,
+                                    xl : 30
+                                } 
+                                }}>
                             New user&nbsp;
                             <Link to='/signup'
                                 style={{ textDecoration: 'none', color: '#0096FF' }}>
