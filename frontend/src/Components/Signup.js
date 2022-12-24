@@ -3,10 +3,11 @@ import './Signup.css'
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
+import {TextField} from '@mui/material/';
 import { Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosClient from '../network/client';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 function Signup() {
     const [userData, setUserData] = useState({
@@ -26,6 +27,8 @@ function Signup() {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+    const isSmallScreen = useMediaQuery('(max-width: 600px)');
+    const isMediumScreen = useMediaQuery('(min-width: 601px) and (max-width: 960px)');
 
     const handleInputs = (e) => {
 
@@ -78,19 +81,60 @@ function Signup() {
                 <Box sx={{ minWidth: 275 }}>
                     <Card variant="outlined"
                         className='signup-card'
-                        sx={{ height: 550, width: 400, borderRadius: 10 }}>
+                        sx={{ 
+                            height: {
+                                xs : 400,
+                                sm : 500,
+                                md : 500,
+                                lg : 500,
+                                xl : 500
+                            }, 
+                            width: {
+                                xs : 270,
+                                sm : 350,
+                                md : 400,
+                                lg : 400,
+                                xl : 400
+                            }, 
+                            
+                            borderRadius: {
+                                xs : 4  ,
+                                sm : 4,
+                                md : 10,
+                                lg : 10,
+                                xl : 10
+                            } 
+                            
+                        }}>,
+                        
                         <Typography
                             component='span'
                             variant='body2'
-                            sx={{ marginTop: '1rem', color: 'black', fontSize: '25px', fontWeight: '600' }}>
-                            Sign Up
+                            sx={{
+                                color: 'black', 
+                                fontSize: {
+                                    xs : '18px',     
+                                    sm : '20px',
+                                    md : '22px'
+                                },
+                                marginTop : {
+                                    xl : 2
+                                },
+
+                                fontWeight: '600' 
+                                }}>
+                            Sign up
                         </Typography>
 
                         <TextField
                             id="outlined-basic"
-                            sx={{ width: '90%', marginTop: 3 }}
+                            sx={{ 
+                                width: '90%', 
+                                marginTop: 3,
+                            }}
                             label="First name"
                             disabled={loading}
+                            size = {isSmallScreen ? 'small' : 'medium'}
                             value={userData.first_name}
                             name="first_name"
                             onChange={(e) => handleInputs(e)}
@@ -102,6 +146,7 @@ function Signup() {
                             sx={{ width: '90%', marginTop: 3 }}
                             value={userData.last_name}
                             disabled={loading}
+                            size = {isSmallScreen ? 'small' : 'medium'}
                             onChange={(e) => handleInputs(e)}
                             name="last_name"
                             label="Last name"
@@ -114,6 +159,7 @@ function Signup() {
                             value={userData.email}
                             disabled={loading}
                             name="email"
+                            size = {isSmallScreen ? 'small' : 'medium'}
                             type='email'
                             onChange={(e) => handleInputs(e)}
                             label="Email address"
@@ -124,6 +170,7 @@ function Signup() {
                             id="outlined-basic"
                             sx={{ width: '90%', marginTop: 3 }}
                             label="Password"
+                            size = {isSmallScreen ? 'small' : 'medium'}
                             type='password'
                             disabled={loading}
                             onChange={(e) => handleInputs(e)}
@@ -134,7 +181,7 @@ function Signup() {
 
                         <Button
                             sx={{ width: '90%', backgroundColor: '#4169E1', marginTop: 3 }}
-                            size='medium'
+                            size = {isSmallScreen ? 'small' : 'medium'}
                             disabled={loading}
                             onClick={createUser}
                             variant="contained">
@@ -144,7 +191,15 @@ function Signup() {
                         <Typography
                             component='span'
                             variant='body2'
-                            sx={{ color: 'gray', marginTop: 1, marginLeft: 23 }}>
+                            sx={{ 
+                                color: 'gray', 
+                                marginTop: 1, 
+                                marginLeft: {
+                                    md : 20,
+                                    lg : 20,
+                                    xl : 20
+                                } 
+                                }}>
                             Already registered&nbsp;
                             <Link to='/'
                                 style={{ textDecoration: 'none', color: '#0096FF' }}>

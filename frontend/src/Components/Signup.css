@@ -8,6 +8,7 @@
 
 .signup-card{
     display: flex;
+    overflow: auto;
     flex-direction: column;
     border-radius: 20px;
     align-items: center;
