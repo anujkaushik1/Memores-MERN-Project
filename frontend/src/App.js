@@ -11,15 +11,18 @@ import { useEffect, useState } from 'react';
 
 function MemoriesNavbar() {
   return (
-    <div className='memories'>
-      <span>Memories</span>
+    <div className='navbar'>
+      <div className='memories'>
+        <span>Memories</span>
+      </div>
     </div>
+
 
   )
 }
 
 function Memory() {
-  
+
   const navigate = useNavigate();
   const [parentBool, setParentBool] = useState(false);
 
@@ -29,7 +32,7 @@ function Memory() {
 
   useEffect(() => {
 
-    if(!Cookies.get('token')){
+    if (!Cookies.get('token')) {
       navigate('/');
     }
 
@@ -37,13 +40,12 @@ function Memory() {
 
   return (
     <>
-      <div className='navbar'>
-        <MemoriesNavbar />
-      </div>
+    
+      <MemoriesNavbar />
 
       <div style={{ display: 'flex' }}>
-        <CardItems parentBool = {parentBool} />
-        <CreateMemory parentBool = {parentBool} changeState = {changeState}/>
+        <CardItems parentBool={parentBool} />
+        <CreateMemory parentBool={parentBool} changeState={changeState} />
       </div>
     </>
   );
@@ -57,9 +59,9 @@ function App() {
         <Routes>
 
           <Route path='/signup' element={<Signup />}></Route>
-          <Route path='/' element = {<Navigate to = '/login'/>}></Route>
+          <Route path='/' element={<Navigate to='/login' />}></Route>
           <Route path='/login' element={<Login />}></Route>
-          <Route path='/memory' element={<Memory/>}></Route>
+          <Route path='/memory' element={<Memory />}></Route>
 
         </Routes>
       </BrowserRouter>

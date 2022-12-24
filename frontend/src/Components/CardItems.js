@@ -147,7 +147,14 @@ function CardItems(props) {
                     <Box>
                       <Card
                         variant='elevation'
-                        sx={{ width: 270, borderRadius: 3 }}>
+                        sx={{ 
+                          width: {
+                            xs : 270,
+                            sm : 235,
+
+                          }, 
+                          borderRadius: 3 
+                          }}>
                         <Typography
                           component='span'
                           variant='body2'

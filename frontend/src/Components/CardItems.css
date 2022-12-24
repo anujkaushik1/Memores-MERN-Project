@@ -1,4 +1,49 @@
-.carditems-main{
+.carditems-main {
     width: 55vw;
     height: 100vh;
+}
+
+@media screen and (min-width : 320px) {
+    .carditems-main {
+        position: relative;
+        left: -11rem;
+        top: 35rem;
+
+    }
+
+}
+
+@media screen and (min-width : 425px) and (max-width : 768px) {
+    .carditems-main {
+        position: relative;
+        left: -8rem;
+        top: 35rem;
+    }
+}
+
+@media screen and (min-width : 768px) and (max-width : 1024px) {
+    .carditems-main {
+        position: relative;
+        top: 0rem;
+        left: -6rem;
+    }
+}
+
+@media screen and (min-width : 1024px) and (max-width : 1440px) {
+    .carditems-main {
+        width: 52vw;
+        position: relative;
+        /* left: -5rem; */
+        left: -2rem;
+        top: 0rem;
+    }
+}
+
+@media screen and (min-width : 1440px) {
+    .carditems-main {
+        top: 0rem;
+        width: 52vw;
+        position: relative;
+        left: 0rem;
+    }
 }
