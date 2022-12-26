@@ -105,8 +105,7 @@ function CreateMemory(props) {
         
         else{
           formData.append('_id', _id);
-          formData.delete('tags');
-          formData.append('tags', tags);
+          formData.set('tags', tags);
           
           await axiosClient.put('/', formData);
         }
