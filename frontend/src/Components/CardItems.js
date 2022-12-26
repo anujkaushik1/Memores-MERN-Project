@@ -119,8 +119,11 @@ function CardItems(props) {
 
   }
 
-  const sendDataToCreateMemory = (item) => {
+  const sendDataToCreateMemory = (item, e) => {
 
+    if(e.target.id === 'delete')
+        return ;
+    
     if(item.user === user){
 
       let data = {...item};
@@ -167,7 +170,7 @@ function CardItems(props) {
                     <Box>
                       <Card
                         variant='elevation'
-                        onClick={() => sendDataToCreateMemory(item)}
+                        onClick={(e) => sendDataToCreateMemory(item, e)}
 
                         sx={{ 
                           width: {
@@ -242,6 +245,7 @@ function CardItems(props) {
                           </Typography>
                           <Button
                             size="small"
+                            id='delete'
                             disabled={isDeleteDisabled(item)}
                             onClick={() => deleteMemory(item)}
                             sx={{ fontWeight: 'bold', position: 'absolute', right: '2rem' }}>
