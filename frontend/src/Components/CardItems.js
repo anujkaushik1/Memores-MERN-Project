@@ -104,6 +104,21 @@ function CardItems(props) {
 
   }
 
+  const isMemoryLike = (item) =>{
+
+    if(user === null) return ;
+    
+    const isLike = item.likes.find((ele) => ele === user);
+
+    if(isLike){
+      return 'dislike'
+    }
+
+    return 'like';
+
+
+  }
+
   const deleteMemory = async (item) => {
 
     try {
@@ -230,13 +245,17 @@ function CardItems(props) {
                             size="small"
                             id='like'
                             onClick={() => likeMemory(item)}
-                            sx={{ fontWeight: 'bold', color : !item.isLike && 'gray' }}>
+                            sx={{ 
+                              fontWeight: 'bold', 
+                              color : isMemoryLike(item) === 'like' && 'gray'
+                              }}>
                             <ThumbUpIcon 
                               id = 'like_svg'
                               ref = {like}
                               fontSize='small'
                               sx={{ paddingRight: 0.5}} />
-                              {item.isLike ? 'Dislike' : 'Like'}
+
+                              {isMemoryLike(item)}
 
                           </Button>
 
