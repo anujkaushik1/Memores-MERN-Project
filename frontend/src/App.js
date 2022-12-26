@@ -47,7 +47,7 @@ function Memory() {
 
       <div style={{ display: 'flex' }}>
         <CardItems parentBool={parentBool} setDataFromCard={setDataFromCard}/>
-        <CreateMemory parentBool={parentBool} changeState={changeState} dataFromCard = {dataFromCard}/>
+        <CreateMemory parentBool={parentBool} changeState={changeState} setDataFromCard={setDataFromCard} dataFromCard = {dataFromCard}/>
       </div>
     </>
   );

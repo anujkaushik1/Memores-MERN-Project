@@ -76,7 +76,7 @@ function CreateMemory(props) {
 
   }
 
-  const createMemory = async () => {
+  const createAndUpdateMemory = async () => {
 
     let { creator, title, message, tags, file, _id } = memoryObj;
 
@@ -101,12 +101,15 @@ function CreateMemory(props) {
 
         axiosClient.defaults.headers = 'multipart/form-data';        
         if(!props.dataFromCard)
-            await axiosClient.post('/', formData);
+           await axiosClient.post('/', formData);
+        
+         
         
         else{
           formData.append('_id', _id);
           formData.set('tags', tags);
           
+          props.setDataFromCard(undefined);
           await axiosClient.put('/', formData);
         }
            
@@ -211,7 +214,7 @@ function CreateMemory(props) {
       <Button
         sx={{ width: '90%', backgroundColor: '	#0047AB', marginTop: 1.2 }}
         size='medium'
-        onClick={createMemory}
+        onClick={createAndUpdateMemory}
         variant="contained">
         Submit
       </Button>
