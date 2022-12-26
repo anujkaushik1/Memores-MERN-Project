@@ -1,5 +1,3 @@
-let arr = [1,2,3,4,5,4,4,4];
-
-let x = arr.find((v) => v === 18);
-
-console.log(x);
+let str = 'anuj kasuhik';
+let b = str.slice(1);
+console.log(b);

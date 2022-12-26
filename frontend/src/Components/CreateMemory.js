@@ -1,11 +1,12 @@
 import { Typography } from '@mui/material'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './CreateMemory.css'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import axiosClient from '../network/client';
+
 
 function CreateMemory(props) {
 
@@ -26,6 +27,16 @@ function CreateMemory(props) {
   })
 
   const input = useRef();
+
+
+  useEffect(() => {
+
+    if (props.dataFromCard) {
+      setMemoryObj({ ...props.dataFromCard });
+
+    }
+  }, [props.dataFromCard]);
+
 
   const handleInputs = (e) => {
     let value = e.target.value;
@@ -65,9 +76,9 @@ function CreateMemory(props) {
 
   }
 
-  const createMemory = async() => {
+  const createMemory = async () => {
 
-    let { creator, title, message, tags, file } = memoryObj;
+    let { creator, title, message, tags, file, _id } = memoryObj;
 
     const isValidate = validation(creator, title, message, tags, file);
 
@@ -75,33 +86,46 @@ function CreateMemory(props) {
       return;
     }
 
-    try {
-      
-      const formData = new FormData();
-      formData.append('creator', creator);
-      formData.append('title', title);
-      formData.append('message', message);
-  
-      tags = "#" + (tags.split(' ').join('_'));
+      try {
 
-      formData.append('tags', tags);
-      formData.append('file', file);
+        const formData = new FormData();
 
-      axiosClient.defaults.headers = 'multipart/form-data'; 
+        formData.append('creator', creator);
+        formData.append('title', title);
+        formData.append('message', message);
 
-      await axiosClient.post('/', formData);
+        tags = "#" + (tags.split(' ').join('_'));
 
-      props.changeState(!props.parentBool);
+        formData.append('tags', tags);
+        formData.append('file', file);
 
-      alert('Data Submitted Successfully');
-      clearMemoryInputs();
+        axiosClient.defaults.headers = 'multipart/form-data';        
+        if(!props.dataFromCard)
+            await axiosClient.post('/', formData);
+        
+        else{
+          formData.append('_id', _id);
+          formData.delete('tags');
+          formData.append('tags', tags);
+          
+          await axiosClient.put('/', formData);
+        }
+           
 
-    } catch (error) {
-      console.log(error);
-    }
+        props.changeState(!props.parentBool);
 
+        alert('Data Submitted Successfully');
+        clearMemoryInputs();
+
+      } catch (error) {
+        console.log(error);
+      }
+    
+   
 
   }
+
+  
 
   const validation = (creator, title, message, tags, file) => {
 
@@ -194,7 +218,7 @@ function CreateMemory(props) {
       </Button>
       <Button
         disableFocusRipple
-        style={{ width: '90%', backgroundColor: 'red', position: 'relative', top: '0.5rem' }}
+        style={{ width: '90%', backgroundColor: 'red', marginTop: '0.5rem' }}
         size='small'
         onClick={clearMemoryInputs}
         variant="contained">

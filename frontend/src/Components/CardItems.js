@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { LinearProgress, Grid, Paper, imageListClasses } from '@mui/material';
+import { LinearProgress, Grid, Paper, imageListClasses, ListItemSecondaryAction } from '@mui/material';
 import Box from '@mui/material/Box';
 import testingimage from '../static/testingflask.jpg';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -34,6 +34,8 @@ function CardItems(props) {
     })();
 
   }, [props.parentBool]);
+
+
 
 
   const getAllMemoryItems = async () => {
@@ -95,7 +97,8 @@ function CardItems(props) {
       return;
 
     if (item.user === user)
-      return false;
+       return false;
+    
 
     return true
 
@@ -113,6 +116,23 @@ function CardItems(props) {
       console.log(error.response);
     }
 
+
+  }
+
+  const sendDataToCreateMemory = (item) => {
+
+    if(item.user === user){
+
+      let data = {...item};
+
+      let tags = data.tags;
+      tags = tags.slice(1);
+      
+      data.tags = tags;
+
+      props.setDataFromCard(data);
+ 
+    }
 
   }
 
@@ -138,22 +158,25 @@ function CardItems(props) {
               top={'10px'} >
 
               {
-                memoryItemData.map((item, idx) => (
+                memoryItemData.map((item) => (
                   <Grid
-                    key={idx}
+                    key={item._id}
                     item
                     bottom={8} marginTop={2} paddingLeft={2} paddingRight={2}
                     position={'relative'}>
                     <Box>
                       <Card
                         variant='elevation'
+                        onClick={() => sendDataToCreateMemory(item)}
+
                         sx={{ 
                           width: {
                             xs : 270,
                             sm : 235,
 
                           }, 
-                          borderRadius: 3 
+                          borderRadius: 3,
+                          cursor : item.user === user && 'pointer'
                           }}>
                         <Typography
                           component='span'

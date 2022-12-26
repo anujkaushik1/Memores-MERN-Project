@@ -25,6 +25,7 @@ function Memory() {
 
   const navigate = useNavigate();
   const [parentBool, setParentBool] = useState(false);
+  const [dataFromCard, setDataFromCard] = useState(undefined);
 
   const changeState = (val) => {
     setParentBool(val);
@@ -36,6 +37,7 @@ function Memory() {
       navigate('/');
     }
 
+
   }, []);
 
   return (
@@ -44,8 +46,8 @@ function Memory() {
       <MemoriesNavbar />
 
       <div style={{ display: 'flex' }}>
-        <CardItems parentBool={parentBool} />
-        <CreateMemory parentBool={parentBool} changeState={changeState} />
+        <CardItems parentBool={parentBool} setDataFromCard={setDataFromCard}/>
+        <CreateMemory parentBool={parentBool} changeState={changeState} dataFromCard = {dataFromCard}/>
       </div>
     </>
   );

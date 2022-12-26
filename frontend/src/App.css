@@ -34,7 +34,7 @@ html {
   .memories {
     width: 100vw;
     position: relative;
-    left: 7rem;
+    left: 3rem;
   }
 }
 
@@ -42,15 +42,15 @@ html {
   .memories {
     width: 100vw;
     position: relative;
-    left: 6rem;
+    left: 2rem;
   }
 }
 
 @media screen and (min-width : 425px) and (max-width : 768px) {
   .memories {
-    width: 100vw;
+    width: 80vw;
     position: relative;
-    left: 4.5rem;
+    left: 0rem;
   }
 }
 
@@ -71,7 +71,7 @@ html {
 }
 
 @media screen and (min-width : 1440px) {
-  .memories {
+   .memories {
     width: 70vw;
     position: relative;
     left: 1rem;
