@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './CardItems.css'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -14,13 +14,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axiosClient from '../network/client';
 import moment from 'moment/moment';
 
-
 function CardItems(props) {
 
   const [memoryItemData, setMemoryItemData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const IMAGE_URL = 'http://localhost:5000/uploads/';
+  const like = useRef(null);
 
   useEffect(() => {
 
@@ -121,7 +121,7 @@ function CardItems(props) {
 
   const sendDataToCreateMemory = (item, e) => {
 
-    if(e.target.id === 'delete')
+    if(e.target.id === 'delete' || e.target.id === 'like' || like.current.id === 'like_svg')
         return ;
     
     if(item.user === user){
@@ -165,11 +165,12 @@ function CardItems(props) {
                   <Grid
                     key={item._id}
                     item
-                    bottom={8} marginTop={2} paddingLeft={2} paddingRight={2}
+                    bolikeom={8} marginTop={2} paddingLeft={2} paddingRight={2}
                     position={'relative'}>
                     <Box>
                       <Card
                         variant='elevation'
+                        id='sendDataCard'
                         onClick={(e) => sendDataToCreateMemory(item, e)}
 
                         sx={{ 
@@ -227,13 +228,15 @@ function CardItems(props) {
                         <CardActions >
                           <Button
                             size="small"
+                            id='like'
                             onClick={() => likeMemory(item)}
                             sx={{ fontWeight: 'bold', color : !item.isLike && 'gray' }}>
-                            <ThumbUpIcon
+                            <ThumbUpIcon 
+                              id = 'like_svg'
+                              ref = {like}
                               fontSize='small'
-                              sx={{ paddingRight: 0.5,  }} />
-                            
-                            {item.isLike ? 'Dislike' : 'Like'}
+                              sx={{ paddingRight: 0.5}} />
+                              {item.isLike ? 'Dislike' : 'Like'}
 
                           </Button>
 
