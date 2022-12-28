@@ -50,8 +50,6 @@ function CreateMemory(props) {
     setMemoryObj({ ...memoryObj, file: '' });
     const file = e.target.files[0];
 
-    console.log(input.current.value);
-
     if (file.size / (1024 * 1024) > 2) {   // file size greater than 2 mb
       alert('File size is too large !')
       input.current.value = '';
@@ -103,7 +101,6 @@ function CreateMemory(props) {
         if(!props.dataFromCard)
            await axiosClient.post('/', formData);
         
-         
         
         else{
           formData.append('_id', _id);

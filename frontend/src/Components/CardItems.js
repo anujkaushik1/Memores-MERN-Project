@@ -8,7 +8,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { LinearProgress, Grid, Paper, imageListClasses, ListItemSecondaryAction } from '@mui/material';
 import Box from '@mui/material/Box';
-import testingimage from '../static/testingflask.jpg';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axiosClient from '../network/client';
@@ -136,7 +135,7 @@ function CardItems(props) {
 
   const sendDataToCreateMemory = (item, e) => {
 
-    if(e.target.id === 'delete' || e.target.id === 'like' || like.current.id === 'like_svg')
+    if(e.target.id === 'delete' || e.target.id === 'like')
         return ;
     
     if(item.user === user){
