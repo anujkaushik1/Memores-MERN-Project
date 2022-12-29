@@ -8,12 +8,11 @@ const app = express();
 
 dotenv.config({ path: ".env" });
 
-
 app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: [process.env.REACT_APP_URL],
+    origin: true,
     credentials : true
 }));
 
