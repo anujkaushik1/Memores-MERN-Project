@@ -18,10 +18,7 @@ function CardItems(props) {
   const [memoryItemData, setMemoryItemData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const IMAGE_URL = process.env.NODE_ENV === 'production' 
-    ? '/uploads/' 
-    : 'http://localhost:5000/uploads/';
-    
+  const IMAGE_URL = 'http://3.83.243.112/api/uploads/';
   const like = useRef(null);
 
   useEffect(() => {
